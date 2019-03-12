@@ -1,0 +1,26 @@
+<form [formGroup]="myForm">
+  Value: {{ myForm.value | json }}
+
+  <hr>
+
+  <mat-form-field class="full">
+    <input matInput placeholder="email" formControlName="email">
+  </mat-form-field>
+
+  <div formArrayName="phones">
+    <div *ngFor="let phone of phoneForms.controls; let i=index" [formGroupName]="i">
+      <!-- because we have an array we're going to loop over it and while performing this loop we also want to keep track of the index. Each item in this loop is going to be a form froup. -->
+      <mat-form-field class="xs">
+        <input matInput placeholder="area" formControlName="area">
+      </mat-form-field>
+      <mat-form-field class="xs">
+        <input matInput placeholder="prefix" formControlName="prefix">
+      </mat-form-field>
+      <mat-form-field class="sm">
+        <input matInput placeholder="line" formControlName="line">
+      </mat-form-field>
+      <button mat-raised-button color="warn" (click)="deletePhone(i)">Delete</button>
+    </div>
+  </div>
+  <button mat-raised-button color="primary" (click)="addPhone()">Add Phone Number</button>
+</form>
