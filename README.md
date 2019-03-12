@@ -1,2 +1,2 @@
 # Forms-Angular
-Forms using Angular and Material
+Learning Angular i've coded this little app in order to practice Forms using also Material.
