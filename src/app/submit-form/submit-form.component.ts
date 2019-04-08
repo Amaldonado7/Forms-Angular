@@ -23,8 +23,6 @@ export class SubmitFormComponent implements OnInit {
       email: ['', Validators.required],
       message: ['', Validators.required]
     })
-
-    this.preloadData()
   }
 
   // How to submit the form to a backend database, using cloud firestore which is a document data base
@@ -35,22 +33,13 @@ export class SubmitFormComponent implements OnInit {
     const formValue = this.myForm.value;
 
     try {
-      await this.afs.collection('contacts').add(formValue);
+      this.afs.collection('contacts').add(formValue);
       this.success = true;
     } catch(err) { // errores que puedan surgir en el backend
       console.error(err)
     }
-
     this.loading = false;
   }
 
-  preloadData() {
-    this.afs.doc('contacts/Kjn0JWBKdOnUlBwuE93S').valueChanges().pipe(
-      tap(data => {
-        this.myForm.patchValue(data)
-      })
-    )
-    .subscribe()
-  }
 
 }
